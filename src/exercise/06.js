@@ -22,14 +22,46 @@ function UsernameForm({onSubmitUsername}) {
  //criando uma ref, um recurso do React para acessar o contrúdo
  //de elementos de formulario
   const usernameEl = React.useRef()
+
+  //Criar uma varável de estado do react
+  //uma carável de estado mantém uma informação mesmo que o conteúdo da pagina
+  //seja atualizado
+  //Para ler o conteúdo da variável de estado, podemos acessá-la diretamente.
+  //no entanto, para alterar seu conteúdo, usamos uma função set.
+
+  //error-> variáve de estado
+  //setError-> função de atualização da varável de estado
+  //a função useState aceita um parametro que é o Valor inicial da variavel
+  //de estado. ou seja, nesse caso, error tem um valor inicial de string vazia
+
+  const[msg,setMsg] = React.useState('')
+  const[username,setUsername]=React.useState('')
+
+  function handleChange(event){
+    //capturando o valor do input
+    const val = event.target.value
+
+    //Armazena na variavel de estado o valor do input já convertido
+    //para minusculas
+    setUsername(val.toLowerCase())
+    // //o input será válido se seu conteudo for identico 
+    // //ao proprio conteudo em minusculas
+    // const isValid = (val === val.toLowerCase())
+
+    // //atualizando o estado
+    // setMsg(isValid? '':'O valor informado deve estar em minúsculas.')
+
+}
   
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label>Username:</label>
         {/*Associando o ref usernameEl ao input */}
-        <input ref={usernameEl} id="username" type="text" />
+        <input ref={usernameEl} id="username" type="text" onChange={handleChange} value={username} />
       </div>
+      {/*O conteudo da variavel de estado pode ser lido sem necessidade de função auxiliar  */}
+  <div style={{color:'red'}}>{msg}</div>
       <button type="submit">Submit</button>
     </form>
   )
@@ -41,6 +73,7 @@ function UsernameForm({onSubmitUsername}) {
    onSubmitUsername(username)
     //Previne o recarregamento do formulario
 }
+
 }
 
 

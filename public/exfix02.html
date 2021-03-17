@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-bt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercício de Fixação 2</title>
+</head>
+<body>
+
+  <div id="root"></div>
+  
+  <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+
+  <script type="text/babel">
+
+    /*
+      Usando os recursos do React (manupuladores de evento, useRef e useState),
+      escreva o nome completo da pessoa (EM MAIÚSCULAS) toda vez que houver 
+      alteração nos campos de nome ou sobrenome.
+    */
+
+    function MeuForm(props) {
+         const[username,setUsername]=React.useState('')
+         const[username_2,setUsername_2]=React.useState('')
+         const[nome_completo,setNome_completo]=React.useState('')
+
+       const elNome = React.useRef()
+       const elSobrenome = React.useRef()
+
+  function handleChange(event){
+    const refnome = elNome.current.value
+    const refsobre = elSobrenome.current.value
+   
+    setUsername(refnome.toUpperCase())
+    setUsername_2(refsobre.toUpperCase())
+    setNome_completo((refnome+ " "+refsobre).toUpperCase())
+   
+}
+      return (
+        <form>
+          <div>
+            <label htmlFor="nome">Nome</label>
+            <input ref={elNome} id="nome"  onChange={handleChange} value={username} />
+          </div>
+          <div>
+            <label htmlFor="sobrenome">Sobrenome</label>
+            <input  ref={elSobrenome} id="sobrenome" onChange={handleChange} value={username_2} />
+          </div>
+          <div id="nomeCompleto" > {nome_completo}</div>         
+        </form>
+      )
+    }
+
+    ReactDOM.render(<MeuForm />, document.getElementById('root'))
+
+  </script>
+  
+</body>
+</html>
